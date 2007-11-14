@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.5.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+ <name>sfCombineFilterPlugin</name>
+ <channel>pear.symfony-project.com</channel>
+ <summary>Combine included js and css files into single requests to speed up page loads that use many or large css and javascript files.</summary>
+ <description>This filter automatically combines any included js and css files in your request into one request each, passing the string of file names to a special php file that concatenates them and compresses them for faster delivery. This file is then cached for future use.</description>
+ <lead>
+  <name>Scott Meves</name>
+  <user>scottmeves</user>
+  <email>scott@stereointeractive.com</email>
+  <active>yes</active>
+ </lead>
+ <date>2007-07-26</date>
+ <time>11:34:37</time>
+ <version>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.symfony-project.com/license">MIT license</license>
+ <notes>-</notes>
+ <contents>
+  <dir name="/">
+   <file md5sum="fd27c01a1eaa51a51f254ac518e0af00" name="lib/sfCombineFilter.class.php" role="data" />
+   <file md5sum="0dbc029fd2b17de944edd6865effc420" name="web/combine.php" role="data" />
+   <file md5sum="064987ac72d5a69a474a7fda995d2832" name="README" role="data" />
+   <file md5sum="5a6e3a01bce673b38277f73dc1a8bab5" name="LICENSE" role="data" />
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.0.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.1</min>
+   </pearinstaller>
+   <package>
+    <name>symfony</name>
+    <channel>pear.symfony-project.com</channel>
+    <min>1.0.0</min>
+    <max>1.1.0</max>
+    <exclude>1.1.0</exclude>
+   </package>
+  </required>
+ </dependencies>
+ <phprelease />
+ <changelog />
+</package>
