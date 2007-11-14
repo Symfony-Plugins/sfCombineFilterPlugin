@@ -74,3 +74,10 @@ This will capture any requests made to /js/packed/* or /css/packed/* and route t
 === 2007-07-26 | 0.1.0 beta ===
 
 Initial public release.
+
+=== 2007-08-02 | 0.1.1 beta ===
+
+Changes by Kiril Angov:
+ - Fixes regular expression to match '^/css/'
+ - Fixes issues when included files outside of root css and js directories.
+ - New: Option to minify the js using JSMin.
