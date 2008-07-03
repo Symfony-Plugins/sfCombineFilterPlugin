@@ -10,11 +10,11 @@
   <email>scott@stereointeractive.com</email>
   <active>yes</active>
  </lead>
- <date>2007-08-01</date>
- <time>23:50:02</time>
+ <date>2007-07-26</date>
+ <time>11:34:37</time>
  <version>
-  <release>0.1.1</release>
-  <api>0.1.1</api>
+  <release>0.1.0</release>
+  <api>0.1.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -24,10 +24,9 @@
  <notes>-</notes>
  <contents>
   <dir name="/">
-   <file md5sum="86e7cd2d5f0386b575804ed6332e6940" name="lib/sfCombineFilter.class.php" role="data" />
-   <file md5sum="f3405423799e62528a9ff46a059e1315" name="lib/JSMin.class.php" role="data" />
-   <file md5sum="05c3b05532b187a2a6e173d36f6aee19" name="web/combine.php" role="data" />
-   <file md5sum="d870ba4c56e95678233ea66ec1bc3ea0" name="README" role="data" />
+   <file md5sum="fd27c01a1eaa51a51f254ac518e0af00" name="lib/sfCombineFilter.class.php" role="data" />
+   <file md5sum="0dbc029fd2b17de944edd6865effc420" name="web/combine.php" role="data" />
+   <file md5sum="064987ac72d5a69a474a7fda995d2832" name="README" role="data" />
    <file md5sum="5a6e3a01bce673b38277f73dc1a8bab5" name="LICENSE" role="data" />
   </dir>
  </contents>
