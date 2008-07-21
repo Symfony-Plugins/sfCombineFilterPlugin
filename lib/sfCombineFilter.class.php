@@ -140,12 +140,12 @@ class sfCombineFilter extends sfFilter
           $con = file_get_contents($path);
         }
 
-        if ($this->type=='javascript'&& sfConfig::get('app_sf_combine_filter_plugin_compress_js', false))
+        if ($this->type=='javascript'&& sfConfig::get('app_sf_combine_filter_plugin_minimize_js', false))
         {
           $jsMin = new JsMinEnh($con);
           $con = $jsMin->minify();
         }
-        elseif($this->type=='css'&& sfConfig::get('app_sf_combine_filter_plugin_compress_css', true))
+        elseif($this->type=='css'&& sfConfig::get('app_sf_combine_filter_plugin_minimize_css', true))
         {
           $con = $this->compressCss($con);
         }
