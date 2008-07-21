@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<package packagerversion="1.5.4" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
+<package xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packagerversion="1.4.1" version="2.0" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0 http://pear.php.net/dtd/tasks-1.0.xsd http://pear.php.net/dtd/package-2.0 http://pear.php.net/dtd/package-2.0.xsd">
  <name>sfCombineFilterPlugin</name>
  <channel>pear.symfony-project.com</channel>
  <summary>Combine included js and css files into single requests to speed up page loads that use many or large css and javascript files.</summary>
  <description>This filter automatically combines any included js and css files in your request into one request each, passing the string of file names to a special php file that concatenates them and compresses them for faster delivery. This file is then cached for future use.</description>
  <lead>
-  <name>Scott Meves</name>
-  <user>scottmeves</user>
-  <email>scott@stereointeractive.com</email>
+  <name>Benjamin Runnels</name>
+  <user>KRavEN</user>
+  <email>kraven@kraven.org</email>
   <active>yes</active>
  </lead>
- <date>2007-08-01</date>
- <time>23:50:02</time>
+ <date>2008-07-21</date>
  <version>
-  <release>0.1.1</release>
-  <api>0.1.1</api>
+   <release>0.1.2</release>
+   <api>0.1.2</api>
  </version>
  <stability>
   <release>beta</release>
@@ -22,19 +21,12 @@
  </stability>
  <license uri="http://www.symfony-project.com/license">MIT license</license>
  <notes>-</notes>
- <contents>
-  <dir name="/">
-   <file md5sum="86e7cd2d5f0386b575804ed6332e6940" name="lib/sfCombineFilter.class.php" role="data" />
-   <file md5sum="f3405423799e62528a9ff46a059e1315" name="lib/JSMin.class.php" role="data" />
-   <file md5sum="05c3b05532b187a2a6e173d36f6aee19" name="web/combine.php" role="data" />
-   <file md5sum="d870ba4c56e95678233ea66ec1bc3ea0" name="README" role="data" />
-   <file md5sum="5a6e3a01bce673b38277f73dc1a8bab5" name="LICENSE" role="data" />
-  </dir>
- </contents>
+ <contents><dir name="/"><dir name="lib"><file name="JsMinEnh.class.php" role="data"/><file name="sfCombineFilter.class.php" role="data"/></dir><file name="package-sfCombineFilterPlugin.xml" role="data"/><dir name="config"><file name="app.yml" role="data"/><file name="config.php" role="data"/></dir><dir name="modules"><dir name="sfCombineFilter"><dir name="lib"><file name="BasesfCombineFilterActions.class.php" role="data"/></dir><dir name="actions"><file name="actions.class.php" role="data"/></dir><dir name="config"><file name="filters.yml" role="data"/><file name="security.yml" role="data"/></dir></dir></dir><file name="README" role="data"/><file name="LICENSE" role="data"/></dir></contents>
+
  <dependencies>
   <required>
    <php>
-    <min>5.0.0</min>
+    <min>5.1.0</min>
    </php>
    <pearinstaller>
     <min>1.4.1</min>
@@ -42,12 +34,16 @@
    <package>
     <name>symfony</name>
     <channel>pear.symfony-project.com</channel>
-    <min>1.0.0</min>
+    <min>0.8.1</min>
     <max>1.1.0</max>
     <exclude>1.1.0</exclude>
    </package>
   </required>
  </dependencies>
- <phprelease />
- <changelog />
+
+ <phprelease>
+ </phprelease>
+
+ <changelog>
+ </changelog>
 </package>

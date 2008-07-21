@@ -2,9 +2,9 @@
 
 The `sfCombineFilter` is an implementation of the [http://rakaz.nl/extra/code/combine CSS and Javascript Combiner] by Niels Leenheer. It makes your pages load faster by combining and compressing javascript and css files.
 
-This filter provides means to automatically combine your included javascripts and stylesheets into one request each. All of the included files are combined into a single large file and compressed using gzip. The resulting file is cached and used every time that particular combination of files is used, until any of the files are changed at which point a new cache is automatically created. 
+This filter provides means to automatically combine your included javascripts and stylesheets into one request each. All of the included files are combined into a single large file.  Gzip compression is determined by the "compressed" setting in settings.yml The resulting file is cached and used every time that particular combination of files is used.  If any of the files are changed a new cache is automatically created.
 
-The symfony filter looks at all of the javascripts and stylesheets resources specified in the current response, and automatically creates a string that combines all of the names together. When your visitors request this special file, they will get one large file, gzipped and ready to go.
+The symfony filter looks at all of the javascripts and stylesheets resources specified in the current response, and automatically creates a string that combines all of the names together. When your visitors request this special file, they will get one large file.
 
 For example, if you are including the following javascripts on every page:
  * /js/prototype.js
@@ -13,16 +13,19 @@ For example, if you are including the following javascripts on every page:
  * /js/dragdrop.js
  * /js/slider.js
 
-Using the combine script, you can combine all of these files into a single file by changing the URL to
- * /js/packed/prototype.js,builder.js,effects.js,dragdrop.js,slider.js
-
-The sfCombineFilter will do this automatically. Then, with the help of .htaccess and the included combine.php file in the /web folder, this request is routed to combine.php which uses the string of file names to either locate an existing cached file of the concatenated and compressed source or create a new one.
+Using the combine script, you can combine all of these files into a single packed.js file
 
 == Features ==
 
  * Support for automatic combination of javascript, css, or both
- * Support for script exclusions based on file path (mainly used when css relies on a particular path to load images)
+ * Support for script exclusions (mainly for scripts that are incompatible with being packed like tiny_mce)
+ * Automatically replaces relative paths in css files with actual paths
+ * Support for css filtered paths for additional paths that need to be removed from the file path before replacing relative paths in the css files
  * Cache that refreshes automatically when source files are changed
+ * Option to minimize the packed.js with JsMinEnh
+ * Option to safe minimize the css
+ * Options to only pack the javascript or css in /packed/js or /packed/css
+ * Filter utilizes client side caching to send 403 for unchanged cache files
 
 == Installation ==
 
@@ -35,8 +38,8 @@ symfony plugin-install http://plugins.symfony-project.com/sfCombineFilter
 
 === Enable the filter ===
 
- * In your app/config/filters.yml, add the sfCombineFilter. This must come AFTER "common":
- 
+ * In app/config/filters.yml, add the sfCombineFilter. This must come AFTER "common":
+
 {{{
 rendering: ~
 web_debug: ~
@@ -49,25 +52,29 @@ common:    ~
 
 sfCombineFilter:
   class:   sfCombineFilter
-  param:
-    javascripts:    true
-    stylesheets:    true
-    root_js_only:   false
-    root_css_only:  true
+    param:
+    condition:  <?php echo (in_array('sfCombineFilter',sfConfig::get('sf_enabled_modules')) ? 'true' : 'false')."\n" ?>
+
 flash:     ~
 execution: ~
 }}}
 
-By default all javascripts and stylesheets requested in '/js-packed' or '/css-packed' respectively are combined into one request each, whereas files requested outside of that path are ignored. You can turn off the filter all together for javascript or css by setting those parameters to "false". If you want to include files requested from any path and not just those inside /js or /css, then set the parameters "root_js_only" and "root_css_only" to false. 
+ * In app/config/settings.yml
 
-=== Modify .htaccess ===
-Add the following to your .htaccess rewrite rules:
-{{{
-  RewriteRule ^css/packed/(.*\.css) /sfCombineFilterPlugin/combine.php?type=css&files=$1
-  RewriteRule ^js/packed/(.*\.js) /sfCombineFilterPlugin/combine.php?type=javascript&files=$1
-}}}
+add sfCombineFilter to enabled_modules: []
 
-This will capture any requests made to /js/packed/* or /css/packed/* and route them through the compression script.
+ * All settings are made in application/config/app.yml.  See plugins/sfCombineFilterPlugin/config/app.yml for defaults and examples.
+ * You can turn off the filter all together for javascript or css by setting those parameters to "false".  You can turn pack on or off by setting minimize_js or minimize_css.
+ * You can combine only the files in /packed/js and /packed/css by setting root_js_only and root_css_only to true.
+ * If you want the combine filter to only be available in the prod environment make a seperate enabled_modules setting for dev: and prod: and leave sfCombineFilter out of dev:.
+
+== Known Issues ==
+
+ * Internet Explorer 6 has problems with large javascript files when gzip compression is on.  If you experience strange issues with your pages in IE6, set compressed: off for you environment in settings.yml and it should resolve the problem
+ * Requires a memory_limit of 32M or more in php.ini.
+ * Not really an issue, but the cache/packed_files cache namespace does not get cleared with symfony cc.  This is desirable as the packed files are static data and should only need to be cleared if you are making a lot of changes to the files being packed.
+ * If you have an issue with your javascript throwing errors only when minimized, look for missing semi-colons in your javascript code.  Each code block enclosed within {} should be followed by a semi-colon.
+ * There may be some issues with script include order if you have .pjs, .pcss files, or script exclusions.  It's generally best to ensure that packed.js is included before anything else.
 
 == Changelog ==
 
@@ -81,3 +88,14 @@ Changes by Kiril Angov:
  - Fixes regular expression to match '^/css/'
  - Fixes issues when included files outside of root css and js directories.
  - New: Option to minify the js using JSMin.
+
+ === 2008-07-21 | 0.1.2 beta ===
+Changes by Benjamin Runnels:
+ - Moved cache generation/management into the filter
+ - Removed .htaccess modification requirements
+ - added minimize_js and minimize_css options to the filter
+ - added client side caching for the packed files and improved the request name so it will cache properly
+ - added routing rules to route to the sfCombineFilter module
+ - added non-harmfull css minimizer
+ - added path replacement in css files to resolve relative path issues
+ - switched to JsMinEnh class to improve memory usage and speed of javascript minimizing

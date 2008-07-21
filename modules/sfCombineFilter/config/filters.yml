@@ -1,0 +1,13 @@
+rendering:  ~
+web_debug:
+  enabled:  off
+security:   ~
+cache:
+  enabled:  off
+common:
+  enabled:  off
+sfCombineFilter:
+  enabled:  off
+flash:
+  enabled:  off
+execution:  ~

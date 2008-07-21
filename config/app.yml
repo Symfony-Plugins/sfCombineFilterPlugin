@@ -1,0 +1,12 @@
+all: # these are the defaults, you should override them in your application/config/app.yml file
+  sf_combine_filter_plugin:
+    css_filtered_paths:          [%SF_ROOT_DIR%, plugins/, web/]  # you want to end your paths (comma seperated) with a /
+    js_exclude_files:            [tiny_mce]   # you probably want E.G. tiny_mce in here, so I did this for you ;-)
+
+    #defaults
+    #javascripts:    true
+    #stylesheets:    true
+    #minimize_js:    false
+    #minimize_css:   true
+    #root_js_only:   false
+    #root_css_only:  false
