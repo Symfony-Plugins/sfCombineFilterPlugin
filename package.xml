@@ -21,7 +21,7 @@
  </stability>
  <license uri="http://www.symfony-project.com/license">MIT license</license>
  <notes>-</notes>
- <contents><dir name="/"><dir name="lib"><file name="JsMinEnh.class.php" role="data"/><file name="sfCombineFilter.class.php" role="data"/></dir><file name="package-sfCombineFilterPlugin.xml" role="data"/><dir name="config"><file name="app.yml" role="data"/><file name="config.php" role="data"/></dir><dir name="modules"><dir name="sfCombineFilter"><dir name="lib"><file name="BasesfCombineFilterActions.class.php" role="data"/></dir><dir name="actions"><file name="actions.class.php" role="data"/></dir><dir name="config"><file name="filters.yml" role="data"/><file name="security.yml" role="data"/></dir></dir></dir><file name="README" role="data"/><file name="LICENSE" role="data"/></dir></contents>
+ <contents><dir name="/"><dir name="lib"><file name="JsMinEnh.class.php" role="data"/><file name="sfCombineFilter.class.php" role="data"/></dir><dir name="config"><file name="app.yml" role="data"/><file name="config.php" role="data"/></dir><dir name="modules"><dir name="sfCombineFilter"><dir name="lib"><file name="BasesfCombineFilterActions.class.php" role="data"/></dir><dir name="actions"><file name="actions.class.php" role="data"/></dir><dir name="config"><file name="filters.yml" role="data"/><file name="security.yml" role="data"/></dir></dir></dir><file name="README" role="data"/><file name="LICENSE" role="data"/></dir></contents>
 
  <dependencies>
   <required>
