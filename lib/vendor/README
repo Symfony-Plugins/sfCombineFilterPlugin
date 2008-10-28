@@ -1,0 +1,6 @@
+This is a fast, low-overhead port of Douglas Crockford's JSMin JavaScript minifier to PHP. It requires PHP 5 or higher. 
+
+see http://code.google.com/p/jsmin-php/ 
+and http://www.crockford.com/javascript/jsmin.html
+
+and http://code.google.com/p/cssmin/

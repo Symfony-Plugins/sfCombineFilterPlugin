@@ -132,25 +132,26 @@ class sfCombineFilter extends sfFilter
       {
         if($this->type=='css')
         {
+          $con = "\n\n".'/* include css file: '.$path." */\n\n";
           $cssPath = str_replace(sfConfig::get('app_sf_combine_filter_plugin_css_filtered_paths', array()),'',$path);
-          $con = $this->fixCssPaths(file_get_contents($path),$cssPath);
+          $con .= $this->fixCssPaths(file_get_contents($path),$cssPath);
         }
         else
         {
-          $con = file_get_contents($path);
-        }
-
-        if ($this->type=='javascript'&& sfConfig::get('app_sf_combine_filter_plugin_minimize_js', false))
-        {
-          $jsMin = new JsMinEnh($con);
-          $con = $jsMin->minify();
-        }
-        elseif($this->type=='css'&& sfConfig::get('app_sf_combine_filter_plugin_minimize_css', true))
-        {
-          $con = $this->compressCss($con);
+          $con = "\n\n".'/* include js file: '.$file." */\n\n";
+          $con .= file_get_contents($path);
         }
 
         $contents .= "\n" . $con;
+      }
+
+      if ($this->type=='javascript'&& sfConfig::get('app_sf_combine_filter_plugin_minimize_js', false))
+      {
+        $contents = JSMin::minify($contents);
+      }
+      elseif($this->type=='css'&& sfConfig::get('app_sf_combine_filter_plugin_minimize_css', true))
+      {
+        $contents = cssmin::minify($contents, array('preserve-urls' => false));
       }
 
       //Write the file data to the cache
@@ -167,7 +168,8 @@ class sfCombineFilter extends sfFilter
     // TODO:  check and see if this breaks hacks.  Turning it off for now
     //$content = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $content);
     // remove tabs, spaces, newlines, etc.
-    $content = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $content);
+    //$content = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $content);
+    cssmin::minify($content, array('preserve-urls' => false));
     return $content;
   }
 
